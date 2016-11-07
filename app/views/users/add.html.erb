@@ -1,0 +1,41 @@
+<% @page_title = "Registreren" %>
+
+
+<% if @user.errors.any? %>
+    <ul class="callout alert">
+      <% for message_error in @user.errors.full_messages %>
+          <li><%= message_error %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+
+<div class="row">
+  <div class="medium-12 column">
+    <div class="card">
+      <div class="card-title">Log in</div>
+      <div class="card-body">
+        <%= form_for(:user, :url => {:controller => 'users', :action => 'add'}) do |f| %>
+            <fieldset class="input-group">
+              <label for="username">Gebruikersnaam</label>
+              <%= f.text_field :username %>
+            </fieldset>
+            </fieldset>
+            <fieldset class="input-group">
+              <label for="email">E-mail</label>
+              <%= f.text_field :email %>
+            </fieldset>
+            <fieldset class="input-group">
+              <label for="password">Wachtwoord</label>
+              <%= f.password_field :password %>
+            </fieldset>
+            <fieldset class="input-group">
+              <label for="password_repeat">Herhaal wachtwoord</label>
+              <%= f.password_field :password_confirmation %>
+            </fieldset>
+            <%= f.submit :"Maak mijn account", {class: "button"} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

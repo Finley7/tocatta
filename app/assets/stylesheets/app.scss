@@ -1,0 +1,32 @@
+// Place all the styles related to the app controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i';
+body, html {
+  font-family: 'Roboto', sans-serif!important;
+  background: #eee;
+  color:#333;
+}
+
+.card {
+  background:#fff;
+  box-shadow:0px 1px 5px rgba(0,0,0,0.2);
+
+  .card-title {
+    padding:15px 17px;
+    font-weight:700;
+  }
+
+  .card-body {
+    padding: 0 20px 20px 20px;
+    font-size:13px;
+  }
+
+}
+
+[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="time"], [type="url"], [type="week"], textarea {
+  box-shadow:none;
+  font-family:'Roboto', sans-serif;
+  font-weight:600;
+  width:100%;
+}
