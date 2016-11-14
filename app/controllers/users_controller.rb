@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    if !current_user
+    if !logged_in
       redirect_to :action => 'login'
       flash[:notice] = "Log in alsjeblieft"
     end
@@ -9,9 +9,12 @@ class UsersController < ApplicationController
   end
 
   def login
-    if current_user
+    if logged_in
       redirect_to :action => 'index'
-      flash[:notice] = "Je bent al ingelogd!"
+
+      flash[:message] = "Je bent al ingelogd!"
+      flash[:type] = "alert"
+
     end
 
     if request.post?
@@ -19,18 +22,28 @@ class UsersController < ApplicationController
 
       if @user_check
         session[:user] = @user_check
+
+        flash[:message] = "Welkom terug, " + @user_check.username
+        flash[:type] = "success"
+
         redirect_to :action => 'index'
       else
-        flash[:notice] = "We konden je niet inloggen"
+
+        flash[:message] = "We konden je niet inloggen"
+        flash[:type] = "alert"
+
       end
     end
   end
 
   def add
 
-    if !current_user.nil?
+    if logged_in
       redirect_to :action => 'index'
-      flash[:notice] = "Je bent al ingelogd!"
+
+      flash[:message] = "Je bent al ingelogd!"
+      flash[:type] = "alert"
+
     end
 
     @user = User.new
@@ -41,16 +54,42 @@ class UsersController < ApplicationController
       if @user.save
         redirect_to :action => 'login'
 
-        flash[:notice] = "Succesvol geregistreerd"
+        flash[:message] = "Je kunt nu inloggen!"
+        flash[:type] = "success"
 
       else
-        flash[:notice] = "Er ging iets fout"
+        flash[:message] = "Er ging iets fout"
+        flash[:type] = "alert"
       end
     end
   end
 
-  def show
+  def logout
 
+    if request.post?
+      if logged_in
+
+        session.destroy
+
+        redirect_to :action => 'login'
+
+        flash[:message] = "Je bent uitgelogd!"
+        flash[:type] = "success"
+
+      end
+    end
+
+  end
+
+  def edit
+    if !logged_in
+      redirect_to :action => 'index'
+
+      flash[:message] = "Log in alsjeblieft"
+      flash[:type] = "alert"
+    end
+
+    @user = User.find(current_user.id)
   end
 
   def user_params

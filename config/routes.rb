@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resource :forums do
+    get 'index'
+
+    get 'add'
+    post 'add'
+
+    get 'view'
+  end
+
   resource :users do
     get 'index'
 
@@ -8,7 +17,15 @@ Rails.application.routes.draw do
 
     get  'add'
     post 'add'
+
+    post 'logout'
+
+    get 'edit'
+    post 'edit'
   end
+
+  get 'forum' => 'sections#index'
+  get 'thread-:slug-:id' => 'topics#show'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

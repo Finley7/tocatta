@@ -2,31 +2,177 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i';
+
 body, html {
-  font-family: 'Roboto', sans-serif!important;
+  font-family: 'Roboto', sans-serif !important;
   background: #eee;
-  color:#333;
+  color: #333;
+}
+a {
+  color:#337ab7;
 }
 
 .card {
-  background:#fff;
-  box-shadow:0px 1px 5px rgba(0,0,0,0.2);
+  background: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
 
   .card-title {
-    padding:15px 17px;
-    font-weight:700;
+    padding: 15px 17px;
+    font-weight: 700;
   }
 
   .card-body {
     padding: 0 20px 20px 20px;
-    font-size:13px;
+    font-size: 13px;
+  }
+
+  .card-list {
+    list-style-type: none;
   }
 
 }
 
-[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="time"], [type="url"], [type="week"], textarea {
-  box-shadow:none;
-  font-family:'Roboto', sans-serif;
-  font-weight:600;
-  width:100%;
+.card-forum {
+  background: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+
+  .card-title {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    background: #eee;
+    color:#333;
+  }
+
+  .forum-row {
+    padding:5px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .icon {
+    font-size:34px;
+    padding-left:45px;
+    color: #606060;
+  }
+
+  .forum-link {
+    font-weight:700;
+  }
+
+  .forum-description {
+    font-size:12px;
+  }
+  .recent-topic-link {
+    font-weight:700;
+  }
+  .recent-post-author {
+    font-size:12px;
+  }
+
+}
+
+header, .top-bar {
+  background: #c30814;
+  color: #fff;
+}
+
+header {
+  padding: 10px 0;
+}
+
+.top-bar {
+  a {
+    color: #fff;
+  }
+  a:hover {
+    color: #ededed;
+  }
+  ul {
+    background: #c30814;
+  }
+}
+
+.top-bar-right {
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.top-bar-left {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+  font-family: 'FontAwesome';
+  content: '\f107';
+  border: 0;
+  width: auto;
+  height: auto;
+  margin-top: -7px;
+}
+
+.title-bar {
+  background: #c30814;
+  font-family: 'Roboto', sans-serif;
+}
+
+.is-dropdown-submenu {
+  border: 0;
+  background: #fff !important;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999999;
+}
+
+.is-dropdown-submenu a {
+  color: #333 !important;
+}
+
+.is-dropdown-submenu li:hover {
+  background: #eee;
+}
+
+input[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], [type="email"], [type="month"], [type="number"], [type="password"], [type="search"], [type="tel"], [type="text"], [type="time"], [type="url"], [type="week"], textarea {
+  box-shadow: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  width: 100%;
+}
+
+.button {
+  padding: 10px 20px;
+  font-weight: 700;
+  background: #2a6496;
+}
+
+.callout.alert {
+  background: #fff;
+  color: #c30814;
+  border: 0;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.callout.success {
+  background: #fff;
+  color: #1b9226;
+  border: 0;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-weight: 700;
+}
+.pull-right {
+  float:right;
+}
+.description-text {
+  font-weight:100;
+}
+
+.role {
+  font-weight: 700;
+}
+
+.Admin {
+  color:#1b9226!important;
 }

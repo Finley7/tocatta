@@ -1,13 +1,6 @@
 <% @page_title = "Registreren" %>
 
 
-<% if @user.errors.any? %>
-    <ul class="callout alert">
-      <% for message_error in @user.errors.full_messages %>
-          <li><%= message_error %></li>
-      <% end %>
-    </ul>
-<% end %>
 
 
 <div class="row">
@@ -15,6 +8,13 @@
     <div class="card">
       <div class="card-title">Log in</div>
       <div class="card-body">
+        <% if @user.errors.any? %>
+            <ul class="note-list">
+              <% for message_error in @user.errors.full_messages %>
+                  <li><%= message_error %></li>
+              <% end %>
+            </ul>
+        <% end %>
         <%= form_for(:user, :url => {:controller => 'users', :action => 'add'}) do |f| %>
             <fieldset class="input-group">
               <label for="username">Gebruikersnaam</label>

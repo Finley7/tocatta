@@ -7,4 +7,17 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, :in => 6..20, :on => :create
 
+  has_one :role, :foreign_key => :id, :primary_key => :primary_role
+
+  def has_role(id)
+    role = Role.find(id)
+
+    if self.primary_role == role.id
+      true
+    else
+      false
+    end
+
+  end
+
 end

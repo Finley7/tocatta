@@ -1,1 +1,19 @@
-Yo <%= current_user.username %>
+<% @page_title = current_user.username %>
+
+<% @page_title = 'Welkom op Toccata' %>
+<div class="row" style="margin-top:20px">
+  <div class="medium-12 columns">
+    <div class="card">
+      <div class="card-title">Gebruikerspaneel</div>
+      <div class="card-body">
+        <h1>Hier kun je je gebruikersprofiel beheren</h1>
+        <code>
+          <pre>
+            <%= debug(current_user) %>
+          </pre>
+        </code>
+      </div>
+    </div>
+  </div>
+</div>
+

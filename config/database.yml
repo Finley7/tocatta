@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: toccata_production
-  username: toccata
-  password: <%= ENV['TOCCATA_DATABASE_PASSWORD'] %>
+  database: toccata_development
+  username: root
+  password:
