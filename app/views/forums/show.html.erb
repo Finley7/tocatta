@@ -1,0 +1,63 @@
+<div class="row forums">
+
+  <% if @forum.is_subforum.nil? %>
+      <div class="medium-12 columns">
+        <div class="card-forum">
+          <div class="card-title medium-12 large-12 small-12">
+            Subforums van <%= @forum.name %>
+          </div>
+          <% @forum.subforums.each do |subforum| %>
+              <div class="row forum-row">
+                <div class="medium-1 large-1 columns hide-for-small-only icon">
+                  <i class="fa fa-comment" aria-hidden="true"></i>
+                </div>
+                <div class="medium-8 large-8 small-6 columns">
+                  <%= link_to subforum.name, {controller: 'forums', action: 'show', id: subforum.id}, class: 'forum-link' %>
+                  <p class="forum-description"><%= subforum.description %></p>
+                </div>
+                <div class="medium-3 large-3 small-6 columns">
+                  <% @forum.last_topic(subforum.id).each do |topic| %>
+                      <%= link_to truncate(topic.title, length: 30), {controller: 'topics', action: 'show', id: topic.id, slug: topic.slug}, class: 'recent-topic-link' %>
+                      <p class="recent-post-author">
+                        Door
+                        <%= link_to topic.lastposter.username, {controller: 'users', action: 'show', id: topic.lastposter.id}, class: 'role ' + topic.lastposter.role.name %>
+                        <br><span class="recent-post-author"><%= time_ago_in_words(topic.lastpost_date) %> geleden</span>
+                      </p>
+                  <% end %>
+                </div>
+              </div>
+          <% end %>
+
+        </div>
+
+      </div>
+  <% end %>
+
+</div>
+
+<div class="row forums">
+  <div class="medium-12 columns">
+    <div class="card-forum">
+      <div class="card-title medium-12 large-12 small-12">
+        Topics van <%= @forum.name %>
+      </div>
+      <% @forum.topics.each do |topic| %>
+          <div class="row forum-row">
+            <div class="medium-1 large-1 columns hide-for-small-only icon">
+              <i class="fa fa-comment" aria-hidden="true"></i>
+            </div>
+            <div class="medium-8 large-8 small-6 columns">
+              <%= link_to topic.title, {controller: 'topics', action: 'show', id: topic.id, slug: topic.slug}, class: 'forum-link' %>
+              <p class="forum-description"><%= time_ago_in_words(topic.created_at) %></p>
+            </div>
+            <div class="medium-3 large-3 small-6 columns">
+
+            </div>
+          </div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+

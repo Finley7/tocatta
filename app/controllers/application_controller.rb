@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :logged_in
+  helper_method :has_role
+
+  add_breadcrumb "Home", :controller => 'pages', :action => 'landing'
 
   def current_user
     if !session[:user].nil?
@@ -22,4 +25,20 @@ class ApplicationController < ActionController::Base
       true
     end
   end
+
+  def has_role(role_id)
+    if logged_in
+      roles = Rolesuser.where(:user_id => current_user.id, :role_id => role_id).first
+
+      if roles.nil?
+        false
+      else
+        true
+      end
+    else
+      false
+    end
+
+  end
+
 end

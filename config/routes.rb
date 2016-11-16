@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   get 'forum' => 'sections#index'
+  get 'forum-:id' => 'forums#show'
   get 'thread-:slug-:id' => 'topics#show'
 
 

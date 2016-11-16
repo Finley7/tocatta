@@ -8,8 +8,9 @@ body, html {
   background: #eee;
   color: #333;
 }
+
 a {
-  color:#337ab7;
+  color: #337ab7;
 }
 
 .card {
@@ -41,34 +42,47 @@ a {
     font-size: 14px;
     font-weight: 700;
     background: #eee;
-    color:#333;
+    color: #333;
   }
 
   .forum-row {
-    padding:5px;
+    padding: 5px;
     border-bottom: 1px solid #eee;
   }
 
   .icon {
-    font-size:34px;
-    padding-left:45px;
+    font-size: 34px;
+    padding-left: 45px;
     color: #606060;
   }
 
   .forum-link {
-    font-weight:700;
+    font-weight: 700;
   }
 
   .forum-description {
-    font-size:12px;
+    font-size: 12px;
   }
   .recent-topic-link {
-    font-weight:700;
+    font-weight: 700;
   }
   .recent-post-author {
-    font-size:12px;
+    font-size: 12px;
   }
 
+}
+
+.breadcrumbs {
+  list-style: none;
+  padding: 5px 15px;
+  background: #f5f5f5;
+  font-weight:700;
+  li {
+    font-size: 12px;
+    a {
+      color: #2a6496;
+    }
+  }
 }
 
 header, .top-bar {
@@ -162,11 +176,13 @@ input[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], 
   font-size: 14px;
   font-weight: 700;
 }
+
 .pull-right {
-  float:right;
+  float: right;
 }
+
 .description-text {
-  font-weight:100;
+  font-weight: 100;
 }
 
 .role {
@@ -174,5 +190,5 @@ input[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], 
 }
 
 .Admin {
-  color:#1b9226!important;
+  color: #1b9226 !important;
 }

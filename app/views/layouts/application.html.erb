@@ -60,6 +60,17 @@
     <div class="callout small <%= flash[:type] %>"><%= flash[:message] %></div>
 <% end %>
 
+<div class="row" style="margin-top:20px;">
+  <div class="medium-12 columns">
+    <div class="">
+      <ul class="breadcrumbs">
+        <%= render_breadcrumbs :separator => '', :tag => 'li' %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <%= yield %>
 
 <script type="text/javascript" charset="utf-8">
