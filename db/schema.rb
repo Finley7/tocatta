@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114190711) do
+ActiveRecord::Schema.define(version: 20161116204435) do
 
   create_table "forums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20161114190711) do
     t.integer "permission_id", null: false
     t.index ["permission_id"], name: "index_permissions_roles_on_permission_id", using: :btree
     t.index ["role_id"], name: "index_permissions_roles_on_role_id", using: :btree
+  end
+
+  create_table "replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "topic_id",                                 null: false
+    t.integer  "author_id",                                null: false
+    t.integer  "edit_by"
+    t.text     "body",       limit: 65535,                 null: false
+    t.boolean  "deleted",                  default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -55,18 +65,22 @@ ActiveRecord::Schema.define(version: 20161114190711) do
     t.datetime "updated_at"
   end
 
-  create_table "threads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "forum_id",                    null: false
-    t.integer  "author_id"
-    t.integer  "lastposter_id"
-    t.datetime "lastpost_date"
+    t.integer  "author_id",                   null: false
+    t.integer  "lastposter_id",               null: false
+    t.datetime "lastpost_date",               null: false
     t.integer  "edit_by"
     t.boolean  "closed"
-    t.string   "title"
-    t.string   "slug"
-    t.text     "body",          limit: 65535
+    t.string   "title",                       null: false
+    t.string   "slug",                        null: false
+    t.text     "body",          limit: 65535, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["author_id"], name: "threads_author_id_fk", using: :btree
+    t.index ["edit_by"], name: "threads_editor_id_fk", using: :btree
+    t.index ["forum_id"], name: "threads_forums_id_fk", using: :btree
+    t.index ["lastposter_id"], name: "threads_lastposter_id_fk", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,4 +92,8 @@ ActiveRecord::Schema.define(version: 20161114190711) do
     t.integer  "primary_role"
   end
 
+  add_foreign_key "topics", "forums", name: "threads_forums_id_fk"
+  add_foreign_key "topics", "users", column: "author_id", name: "threads_author_id_fk"
+  add_foreign_key "topics", "users", column: "edit_by", name: "threads_editor_id_fk"
+  add_foreign_key "topics", "users", column: "lastposter_id", name: "threads_lastposter_id_fk"
 end

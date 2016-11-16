@@ -8,7 +8,6 @@ class SectionsController < ApplicationController
   def index
     @sections = Section.all
 
-    current_user
   end
 
   # GET /sections/1

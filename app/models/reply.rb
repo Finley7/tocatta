@@ -1,0 +1,3 @@
+class Reply < ApplicationRecord
+
+end

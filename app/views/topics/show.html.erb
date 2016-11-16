@@ -1,0 +1,27 @@
+<% @page_title = @topic.title %>
+<div class="row">
+  <div class="medium-12 columns">
+    <div class="card-forum">
+      <div class="card-title"><%= @topic.title %></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="medium-2 small-12 large-2 columns userinfo">
+            <div class="text-center">
+              <%= image_tag('uploads/' + @topic.author.avatar, :class => 'user-avatar', :style => 'width:150px;height:150px;') %>
+              <ul class="user-data">
+                <li><%= link_to @topic.author.username, {controller: 'users', action: 'show', id: @topic.author.id}, class: 'role ' + @topic.author.role.name %></li>
+                <li class="user-title"><%= @topic.author.title %></li>
+              </ul>
+            </div>
+          </div>
+          <div class="medium-10 small-12 large-10 columns topic">
+            <span class="text-muted">
+              <%= time_ago_in_words(@topic.created_at) %> geleden aangemaakt
+            </span>
+            <%= @topic.body %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

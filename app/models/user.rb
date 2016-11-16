@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, :in => 6..20, :on => :create
 
   has_one :role, :foreign_key => :id, :primary_key => :primary_role
+  has_many :topics, :foreign_key => :author_id
 
   def has_role(id)
     role = Role.find(id)

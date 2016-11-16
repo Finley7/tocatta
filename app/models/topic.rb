@@ -5,5 +5,6 @@ class Topic < ApplicationRecord
   belongs_to :lastposter, :class_name => 'User'
   belongs_to :editor, :class_name => 'User', :foreign_key => :edit_by
 
+  has_many :reply, :foreign_key => :topic_id
 
 end
