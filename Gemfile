@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem "font-awesome-rails"
 gem "breadcrumbs_on_rails"
 gem 'will_paginate', '~> 3.1.0'
+gem 'ruby-bbcode'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

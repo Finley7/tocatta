@@ -18,7 +18,10 @@
             <span class="text-muted">
               <%= time_ago_in_words(@topic.created_at) %> geleden aangemaakt
             </span>
-            <%= @topic.body %>
+            <br>
+            <div class="topic-body">
+              <%= raw(@topic.body.bbcode_to_html) %>
+            </div>
           </div>
         </div>
       </div>

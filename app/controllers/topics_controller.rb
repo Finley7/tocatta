@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
     end
 
     @replies = @topic.reply.paginate(:page => params[:page])
+    @body = @topic.body.bbcode_to_html
 
     add_breadcrumb "#{@topic.forum.name}", :controller => 'forums', :action => 'show', :id => @topic.forum.id
     add_breadcrumb "#{@topic.title}", :action => 'show'
