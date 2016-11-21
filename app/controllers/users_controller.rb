@@ -51,16 +51,27 @@ class UsersController < ApplicationController
     if request.post?
       @user = User.new(user_params)
 
-      if @user.save
-        redirect_to :action => 'login'
+      @user.primary_role = 1
 
-        flash[:message] = "Je kunt nu inloggen!"
-        flash[:type] = "success"
+      if @user.save
+        roleuser = Rolesuser.new
+        roleuser.user_id = @user.id
+        roleuser.role_id = 1
+
+        if roleuser.save
+          redirect_to :action => 'login'
+
+          flash[:message] = "Je kunt nu inloggen!"
+          flash[:type] = "success"
+        end
+        flash[:message] = "Er ging iets fout"
+        flash[:type] = "alert"
 
       else
         flash[:message] = "Er ging iets fout"
         flash[:type] = "alert"
       end
+
     end
   end
 

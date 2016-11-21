@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_one :role, :foreign_key => :id, :primary_key => :primary_role
   has_many :topics, :foreign_key => :author_id
 
+  has_and_belongs_to_many :roles
+
   def has_role(id)
     roles = Rolesuser.where(:user_id => self.id, :role_id => id).first
 

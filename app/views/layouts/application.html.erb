@@ -30,26 +30,17 @@
           <li><%= link_to 'Home', controller: 'pages', action: 'landing' %></li>
           <li><%= link_to 'Forum', controller: 'forums', action: 'index' %></li>
           <% if logged_in %>
+              <li><%= link_to current_user.username, controller: 'users', action: 'index' %>
               <li>
-
-                <%= link_to current_user.username, controller: 'users', action: 'index' %>
-
-                <ul class="menu">
-                  <li><%= link_to 'Instellingen', controller: 'users', action: 'login' %></li>
-                  <li>
-                    <form style="display:none" action="<%= root_url %>users/logout" method="post" name="form_logout"><%= token_tag %></form>
-                    <a href="#" onclick="document.form_logout.submit(); event.returnValue = false; return false;">Uitloggen</a>
-                  </li>
-                </ul>
+                <form style="display:none" action="<%= root_url %>users/logout" method="post" name="form_logout"><%= token_tag %></form>
+                <a href="#" onclick="document.form_logout.submit(); event.returnValue = false; return false;">Uitloggen</a>
               </li>
+              <li><%= link_to 'Instellingen', controller: 'users', action: 'login' %></li>
           <% else %>
-              <li>
-                <%= link_to 'Aanmelden', controller: 'users', action: 'login' %>
-                <ul class="menu">
-                  <li><%= link_to 'Inloggen', controller: 'users', action: 'login' %></li>
-                  <li><%= link_to 'Registreren', controller: 'users', action: 'add' %></li>
-                </ul>
-              </li>
+              <li><%= link_to 'Aanmelden', controller: 'users', action: 'login' %></li>
+              <li><%= link_to 'Inloggen', controller: 'users', action: 'login' %></li>
+              <li><%= link_to 'Registreren', controller: 'users', action: 'add' %></li>
+
           <% end %>
         </ul>
       </div>
