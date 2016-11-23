@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resource :forums do
     get 'index'
 
-    get 'add'
-    post 'add'
+    get 'create'
+    post 'create'
 
     get 'view'
   end
@@ -15,14 +15,17 @@ Rails.application.routes.draw do
     get  'login'
     post 'login'
 
-    get  'add'
-    post 'add'
+    get  'create'
+    post 'create'
 
     post 'logout'
 
     get 'edit'
     post 'edit'
   end
+
+  get 'thread/create/:id' => 'topics#create'
+  post 'thread/create/:id' => 'topics#create'
 
   get 'forum' => 'sections#index'
   get 'forum-:id' => 'forums#show'

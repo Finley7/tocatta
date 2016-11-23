@@ -5,7 +5,7 @@ class ForumsController < ApplicationController
     redirect_to :controller => 'sections', :action => 'index'
   end
 
-  def add
+  def create
   end
 
   def show

@@ -41,6 +41,9 @@
     <div class="card-forum">
       <div class="card-title medium-12 large-12 small-12">
         Topics van <%= @forum.name %>
+        <div class="pull-right">
+          <%= link_to "Nieuw topic", {controller: 'topics', action: 'create', id: @forum.id}, class: 'small success button' %>
+        </div>
       </div>
       <% @forum.topics.each do |topic| %>
           <div class="row forum-row">

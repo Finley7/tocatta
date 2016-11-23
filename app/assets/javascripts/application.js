@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require jquery.wysibb.min
 //= require_tree .
 
 $(document).ready(function(){

@@ -7,4 +7,7 @@ class Topic < ApplicationRecord
 
   has_many :reply, :foreign_key => :topic_id
 
+  validates :title, :presence => true, :length => { :in => 5..75 }
+  validates :body, :presence => true, :length => { :in => 10..65535 }
+
 end

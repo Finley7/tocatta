@@ -30,6 +30,7 @@ gem "font-awesome-rails"
 gem "breadcrumbs_on_rails"
 gem 'will_paginate', '~> 3.1.0'
 gem 'ruby-bbcode'
+gem 'slugify', '~> 1.0', '>= 1.0.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

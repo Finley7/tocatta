@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="theme/default/wbbtheme.css">
+<div class="row">
+  <div class="medium-12 column">
+    <div class="card">
+      <div class="card-title">Maak een topic</div>
+      <div class="card-body">
+        <% if @topic.errors.any? %>
+            <ul class="note-list">
+              <% for message_error in @topic.errors.full_messages %>
+                  <li><%= message_error %></li>
+              <% end %>
+            </ul>
+        <% end %>
+        <%= form_for(@topic, :url => {:controller => 'topics', :action => 'create'}) do |f| %>
+            <fieldset class="input-group">
+              <label for="username">Titel</label>
+              <%= f.text_field :title %>
+            </fieldset>
+            <fieldset class="input-group">
+              <label for="password">Inhoud</label>
+              <%= f.text_area :body, {rows: 6} %>
+            </fieldset>
+            <%= f.submit :"Aanmaken", {class: "button"} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $("textarea").wysibb();
+  });
+</script>
