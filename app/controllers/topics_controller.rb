@@ -56,14 +56,24 @@ class TopicsController < ApplicationController
           end
 
         end
+
+        add_breadcrumb "#{@forum.name}", :controller => 'forums', :action => 'show', :id => @forum.id
+        add_breadcrumb "Maak nieuw topic", :action => 'create'
+
+      elsif @forum.permission_id.nil?
+
+        flash[:message] = "Je hebt hier geen toestemming voor"
+        flash[:type] = "alert"
+
       else
-        raise Exception.new("Not enough privileges")
+        flash[:message] = "Je hebt hier geen toestemming voor"
+        flash[:type] = "alert"
+        redirect_to :controller => 'sections', :action => 'index'
       end
     else
-      raise Exception.new("Not logged in")
+      flash[:message] = "Je hebt hier geen toestemming voor"
+      flash[:type] = "alert"
+      redirect_to :controller => 'sections', :action => 'index'
     end
-
-    add_breadcrumb "#{@forum.name}", :controller => 'forums', :action => 'show', :id => @forum.id
-    add_breadcrumb "Maak nieuw topic", :action => 'create'
   end
 end
