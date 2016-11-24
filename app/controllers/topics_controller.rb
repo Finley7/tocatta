@@ -31,48 +31,42 @@ class TopicsController < ApplicationController
         raise Exception.new("Forum niet gevonden")
       end
 
-      if current_user.has_role(@forum.permission_id)
-        @topic = Topic.new
-
-        if request.post?
-          topic_params = params.require(:topic).permit(:title, :body)
-
-          @topic = Topic.new(topic_params)
-
-          @topic.forum_id = @forum.id
-          @topic.author_id = current_user.id
-          @topic.lastposter_id = current_user.id
-          @topic.slug = params[:topic][:title].slugify
-          @topic.lastpost_date = DateTime.current
-
-          if @topic.save
-            flash[:message] = "Je topic is geplaatst!"
-            flash[:type] = "success"
-
-            redirect_to :action => 'show', :slug => @topic.slug, :id => @topic.id
-          else
-            flash[:message] = "Er ging iets fout"
-            flash[:type] = "alert"
-          end
-
+      unless @forum.permission_id.nil?
+        unless current_user.has_role(@forum.permission_id)
+          message('alert', 'Je hebt geen toestemming om hier een topic te plaatsen')
+          return redirect_to :controller => 'sections', :action => 'index'
         end
+      end
+
+
+      @topic = Topic.new
+
+      if request.post?
+        topic_params = params.require(:topic).permit(:title, :body)
+
+        @topic = Topic.new(topic_params)
+
+        @topic.forum_id = @forum.id
+        @topic.author_id = current_user.id
+        @topic.lastposter_id = current_user.id
+        @topic.slug = params[:topic][:title].slugify
+        @topic.lastpost_date = DateTime.current
+
+        if @topic.save
+          message('success', 'Je topic is aangemaakt!')
+
+          redirect_to :action => 'show', :slug => @topic.slug, :id => @topic.id
+        else
+          message('alert', 'Er is iets fout gegaan')
+        end
+
 
         add_breadcrumb "#{@forum.name}", :controller => 'forums', :action => 'show', :id => @forum.id
         add_breadcrumb "Maak nieuw topic", :action => 'create'
-
-      elsif @forum.permission_id.nil?
-
-        flash[:message] = "Je hebt hier geen toestemming voor"
-        flash[:type] = "alert"
-
-      else
-        flash[:message] = "Je hebt hier geen toestemming voor"
-        flash[:type] = "alert"
-        redirect_to :controller => 'sections', :action => 'index'
       end
+
     else
-      flash[:message] = "Je hebt hier geen toestemming voor"
-      flash[:type] = "alert"
+      message('alert', 'Je hebt geen toestemming om deze actie te voltooien')
       redirect_to :controller => 'sections', :action => 'index'
     end
   end

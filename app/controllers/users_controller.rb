@@ -10,11 +10,8 @@ class UsersController < ApplicationController
 
   def login
     if logged_in
+      message('alert', 'Je bent al ingelogd')
       redirect_to :action => 'index'
-
-      flash[:message] = "Je bent al ingelogd!"
-      flash[:type] = "alert"
-
     end
 
     if request.post?
@@ -23,14 +20,12 @@ class UsersController < ApplicationController
       if @user_check
         session[:user] = @user_check
 
-        flash[:message] = "Welkom terug, " + @user_check.username
-        flash[:type] = "success"
+        message('success', "Welkom terug, " + @user_check.username)
 
         redirect_to :action => 'index'
       else
 
-        flash[:message] = "We konden je niet inloggen"
-        flash[:type] = "alert"
+        message('alert', 'We konden je niet inloggen')
 
       end
     end
@@ -39,11 +34,10 @@ class UsersController < ApplicationController
   def add
 
     if logged_in
+
+      message('alert', 'Je bent al ingelogd')
+
       redirect_to :action => 'index'
-
-      flash[:message] = "Je bent al ingelogd!"
-      flash[:type] = "alert"
-
     end
 
     @user = User.new
@@ -61,15 +55,12 @@ class UsersController < ApplicationController
         if roleuser.save
           redirect_to :action => 'login'
 
-          flash[:message] = "Je kunt nu inloggen!"
-          flash[:type] = "success"
+          message('success', 'Je account is aangemaakt en je kunt nu inloggen!')
         end
-        flash[:message] = "Er ging iets fout"
-        flash[:type] = "alert"
+        message('alert', 'Er ging iets fout!')
 
       else
-        flash[:message] = "Er ging iets fout"
-        flash[:type] = "alert"
+        message('alert', 'Er ging iets fout')
       end
 
     end
@@ -82,10 +73,9 @@ class UsersController < ApplicationController
 
         session.destroy
 
-        redirect_to :action => 'login'
+        message('success', 'Je bent uitgelogd')
 
-        flash[:message] = "Je bent uitgelogd!"
-        flash[:type] = "success"
+        redirect_to :action => 'login'
 
       end
     end
@@ -94,10 +84,9 @@ class UsersController < ApplicationController
 
   def edit
     if !logged_in
-      redirect_to :action => 'index'
+      message('alert', 'Je bent al ingelogd')
 
-      flash[:message] = "Log in alsjeblieft"
-      flash[:type] = "alert"
+      redirect_to :action => 'index'
     end
 
     @user = User.find(current_user.id)

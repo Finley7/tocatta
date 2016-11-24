@@ -1,7 +1,22 @@
 <div class="row forums">
+  <div class="medium-4 columns pull-right">
+    <div class="card-forum">
+      <div class="card-title">Recente topics</div>
+      <ul class="list-group list-features">
+        <% recent_topics.each do |recent_topic| %>
+            <li class="list-group-item">
+              <%= link_to  truncate(recent_topic.title, length: 30), {:controller => 'topics', :action => 'show', :id => recent_topic.id, :slug => recent_topic.title} %>
+              <small class="pull-right"><%= time_ago_in_words(recent_topic.created_at) %> geleden</small>
+              <br>
+              <%= link_to recent_topic.lastposter.username, {controller: 'users', action: 'show', id: recent_topic.lastposter.id}, class: 'recent-post-author role ' + recent_topic.lastposter.role.name %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
   <% @sections.each do |section| %>
       <% if section.role_id.nil? %>
-          <div class="medium-12 columns">
+          <div class="medium-8 columns">
             <div class="card-forum">
               <div class="card-title medium-12 large-12 small-12">
                 <%= section.name %>
@@ -10,8 +25,8 @@
 
               <% section.forums.where(:is_subforum => nil).each do |forum| %>
                   <div class="row forum-row">
-                    <div class="medium-1 large-1 columns hide-for-small-only icon">
-                      <i class="fa fa-comment" aria-hidden="true"></i>
+                    <div class="medium-1 large-1 columns hide-for-small-only">
+                      <i class="fa fa-comment icon" aria-hidden="true"></i>
                     </div>
                     <div class="medium-8 large-8 small-6 columns">
                       <%= link_to forum.name, {controller: 'forums', action: 'show', id: forum.id}, class: 'forum-link' %>
@@ -35,7 +50,7 @@
       <% else %>
           <% if logged_in %>
               <% if current_user.has_role(section.role_id) %>
-                  <div class="medium-12 columns">
+                  <div class="medium-8 columns">
                     <div class="card-forum">
                       <div class="card-title medium-12 large-12 small-12">
                         <%= section.name %>
@@ -44,8 +59,8 @@
 
                       <% section.forums.where(:is_subforum => nil).each do |forum| %>
                           <div class="row forum-row">
-                            <div class="medium-1 large-1 columns hide-for-small-only icon">
-                              <i class="fa fa-comment" aria-hidden="true"></i>
+                            <div class="medium-1 large-1 columns hide-for-small-only">
+                              <i class="fa fa-comment icon" aria-hidden="true"></i>
                             </div>
                             <div class="medium-8 large-8 small-6 columns">
                               <%= link_to forum.name, {controller: 'forums', action: 'show', id: forum.id}, class: 'forum-link' %>

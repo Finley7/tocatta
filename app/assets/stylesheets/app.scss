@@ -52,7 +52,13 @@ a {
 
   .icon {
     font-size: 34px;
-    padding-left: 45px;
+    padding-left: 30px;
+    padding-top:10px;
+    color: #606060;
+  }
+
+  .closed {
+    margin-top: -12px;
     color: #606060;
   }
 
@@ -180,7 +186,6 @@ input[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], 
 .pull-right {
   float: right;
 }
-
 .description-text {
   font-weight: 100;
 }
@@ -225,4 +230,25 @@ input[type="color"], [type="date"], [type="datetime-local"], [type="datetime"], 
 }
 pre {
   background:#eee;
+}
+.button {
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.tiny {
+  padding: 4px 6px;
+  font-size:13px!important;
+}
+
+.list-group {
+  margin:0;
+}
+.list-group-item {
+  display: block;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+}
+.list-group-item:last-child {
+  border-bottom: 1px solid #ddd;
 }

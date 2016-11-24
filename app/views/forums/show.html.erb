@@ -1,7 +1,5 @@
-
 <div class="row forums">
-
-  <% unless @forum.is_subforum.nil? %>
+  <% if @forum.subforums.any? %>
       <div class="medium-12 columns">
         <div class="card-forum">
           <div class="card-title medium-12 large-12 small-12">
@@ -22,7 +20,8 @@
                       <p class="recent-post-author">
                         Door
                         <%= link_to topic.lastposter.username, {controller: 'users', action: 'show', id: topic.lastposter.id}, class: 'role ' + topic.lastposter.role.name %>
-                        <br><span class="recent-post-author"><%= time_ago_in_words(topic.lastpost_date) %> geleden</span>
+                        <br><span class="recent-post-author"><%= time_ago_in_words(topic.lastpost_date) %>
+                        geleden</span>
                       </p>
                   <% end %>
                 </div>
@@ -41,14 +40,19 @@
     <div class="card-forum">
       <div class="card-title medium-12 large-12 small-12">
         Topics van <%= @forum.name %>
-        <div class="pull-right">
-          <%= link_to "Nieuw topic", {controller: 'topics', action: 'create', id: @forum.id}, class: 'small success button' %>
-        </div>
+        <% if logged_in %>
+            <div class="pull-right">
+              <%= link_to "Nieuw topic", {controller: 'topics', action: 'create', id: @forum.id}, class: 'tiny success button' %>
+            </div>
+        <% end %>
       </div>
-      <% @forum.topics.each do |topic| %>
+      <% @forum.topics.where(:deleted => false).order(:created_at => 'desc').each do |topic| %>
           <div class="row forum-row">
-            <div class="medium-1 large-1 columns hide-for-small-only icon">
-              <i class="fa fa-comment" aria-hidden="true"></i>
+            <div class="medium-1 large-1 columns hide-for-small-only">
+              <i class="fa fa-comment icon" aria-hidden="true"></i>
+              <% if topic.closed %>
+                <i class="pull-right fa fa-lock closed"></i>
+              <% end %>
             </div>
             <div class="medium-8 large-8 small-6 columns">
               <%= link_to topic.title, {controller: 'topics', action: 'show', id: topic.id, slug: topic.slug}, class: 'forum-link' %>

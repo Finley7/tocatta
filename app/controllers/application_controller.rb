@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :logged_in
-  helper_method :has_role
+  helper_method :recent_topics
 
   add_breadcrumb "Home", :controller => 'pages', :action => 'landing'
 
@@ -39,6 +39,15 @@ class ApplicationController < ActionController::Base
       false
     end
 
+  end
+
+  def message(type, message)
+    flash[:message] = message
+    flash[:type] = type
+  end
+
+  def recent_topics
+    @recent_topics = Topic.all.order(:lastpost_date => 'desc').first(10)
   end
 
 end
